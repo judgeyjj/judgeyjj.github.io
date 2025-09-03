@@ -1,99 +1,406 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>SwinSRGAN Speech Sample</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        h1 {
-            text-align: center;
-            padding: 20px 0;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-        }
-        .section {
-            margin-bottom: 40px;
-        }
-        .section h2 {
-            text-align: center;
-        }
-        .row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        .column {
-            flex: 1;
-            margin-right: 20px;
-        }
-        .column:last-child {
-            margin-right: 0;
-        }
-        .spectrogram {
-            width: 100%;
-            height: 200px;
-            background-color: #f0f0f0;
-            margin-top: 10px;
-        }
-        audio {
-            width: 100%;
-        }
-    </style>
-</head>
-<body>
-    <h1>SwinSRGAN</h1>
-    <div class="container">
-        <div class="section">
-            <h2>P374_002.wav样本对比</h2>
-            <div class="row">
-                <div class="column">
-                    <h3>LR</h3>
-                    <audio controls>
-                        <source src="lr_audio.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                    <div class="spectrogram">LR Spectrogram</div>
-                </div>
-                <div class="column">
-                    <h3>NVSR</h3>
-                    <audio controls>
-                        <source src="nvsr_audio.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                    <div class="spectrogram">NVSR Spectrogram</div>
-                </div>
-                <div class="column">
-                    <h3>mdctGAN</h3>
-                    <audio controls>
-                        <source src="mdctgan_audio.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                    <div class="spectrogram">mdctGAN Spectrogram</div>
-                </div>
-                <div class="column">
-                    <h3>SwinSRGAN</h3>
-                    <audio controls>
-                        <source src="swinsrgan_audio.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                    <div class="spectrogram">SwinSRGAN Spectrogram</div>
-                </div>
-                <div class="column">
-                    <h3>Ground Truth</h3>
-                    <audio controls>
-                        <source src="ground_truth_audio.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                    <div class="spectrogram">Ground Truth Spectrogram</div>
-                </div>
-            </div>
+
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.26.2 by Michael Rose
+  Copyright 2013-2024 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE
+-->
+
+<html lang="en-US" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+<link rel="preload" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@latest/css/all.min.css"></noscript>
+
+
+
+    <!-- start custom head snippets -->
+
+<!-- insert favicons. use https://realfavicongenerator.net/ -->
+
+<!-- Custom CSS for alignment -->
+<style>
+  /* 表格样式 */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  /* 表格单元格样式 */
+  table td {
+    padding: 15px;
+    text-align: center;
+    vertical-align: top;
+    border: 1px solid #ddd;
+    width: 16.66%; /* 6列等宽 */
+  }
+  
+  /* 列内容容器 */
+  .column-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+  
+  /* 标题样式 */
+  .column-content h6 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* 音频播放器统一样式 */
+  audio {
+    width: 100%;
+    height: 40px;
+    display: block;
+    margin: 0;
+  }
+  
+  /* 频谱图统一样式 */
+  .column-content img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;
+    display: block;
+    margin: 0;
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+    .column-content img {
+      height: 120px;
+    }
+    
+    .column-content h6 {
+      font-size: 12px;
+    }
+    
+    table td {
+      padding: 10px;
+    }
+    
+    .column-content {
+      gap: 10px;
+    }
+  }
+</style>
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--posts" dir="ltr">
+
+    
+
+
+    <div class="initial-content">
+
+
+
+<div id="main" role="main">
+  
+
+
+    <h4 id="SwinSRGAN: Swin Transformer-based Generative Adversarial Network for High-Fidelity Speech Super-Resolution"><a href="">SwinSRGAN: Swin Transformer-based Generative Adversarial Network for High-Fidelity Speech Super-Resolution</a></h4>
+<p><b>Jiajun Yuan</b>, Xiaochen Wang, Yulin Wu, Yuhang Xiao, Haoran Chen, Zhiyao He</p>
+
+
+<h4 id="abstract">Abstract</h4>
+
+<p>Speech super-resolution (SR) reconstructs high-frequency content from low-resolution speech signals. Existing systems often suffer from representation mismatch in two-stage mel–vocoder pipelines and from over-smoothing of hallucinated high-band content by CNN-only generators. Diffusion and flow models are computationally expensive, and their robustness across domains and sampling rates remains limited. We propose SwinSRGAN, an end-to-end framework operating on Modified Discrete Cosine Transform (MDCT) magnitudes. It is a Swin Transformer-based U-Net that captures long-range spectro-temporal dependencies. A hybrid adversarial scheme combines time-domain MPD/MSD discriminators with a multi-band MDCT discriminator specialized for the high-frequency band. Training employs a sparse-aware regularizer on arcsinh-compressed MDCT to better preserve transient components. The system upsamples inputs at various sampling rates to 48 kHz in a single pass and operates in real time. On standard benchmarks, SwinSRGAN reduces objective error and improves ABX preference scores. In zero-shot tests on HiFi-TTS without fine-tuning, it outperforms NVSR and mdctGAN, demonstrating strong generalization across datasets.</p>
+
+<h4 id="Comparisons with State-of-the-Art (SOTA) models on data files from VCTK-Test">Comparisons with State-of-the-Art (SOTA) models on data files from VCTK-Test.</h4>
+
+<h5 id="p360_002-8-khz---48-khz">p360_002 (8 kHz -&gt; 48 kHz)</h5>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <div class="column-content">
+          <h6>Ground Truth LR</h6>
+          <img src="./LR/p360_002_8k_mdct.png" alt="Ground Truth LR" />
+          <audio controls="" src="./LR/p360_002_8k.wav"></audio>
         </div>
-    </div>
-</body>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>WSRGlow</h6>
+          <img src="./WSRGlow/6x/p360_002_mdct.png" alt="WSRGlow" />
+          <audio controls="" src="./WSRGlow/6x/p360_002.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>NVSR</h6>
+          <img src="./NVSR/6x/p360_002_mdct.png" alt="NVSR" />
+          <audio controls="" src="./NVSR/6x/p360_002.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>mdctGAN</h6>
+          <img src="./mdctGAN/mdct6x/p360_002_mdct.png" alt="mdctGAN" />
+          <audio controls="" src="./mdctGAN/mdct6x/p360_002.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6><strong>SwinSRGAN (Proposed)</strong></h6>
+          <img src="./swin/swin6x/p360_002_generated_long_mdct.png" alt="SwinSRGAN" />
+          <audio controls="" src="./swin/swin6x/p360_002_generated_long.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>Ground Truth HR</h6>
+          <img src="./Target/p360_002_mdct.png" alt="Ground Truth HR" />
+          <audio controls="" src="./Target/p360_002.wav"></audio>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h5 id="p374_002-8-khz---48-khz">p374_002 (8 kHz -&gt; 48 kHz)</h5>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <div class="column-content">
+          <h6>Ground Truth LR</h6>
+          <img src="./LR/p374_002_8k_mdct.png" alt="Ground Truth LR" />
+          <audio controls="" src="./LR/p374_002_8k.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>NVSR</h6>
+          <img src="./NVSR/6x/p374_002_mdct.png" alt="NVSR" />
+          <audio controls="" src="./NVSR/6x/p374_002.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>mdctGAN</h6>
+          <img src="./mdctGAN/mdct6x/p374_002_mdct.png" alt="mdctGAN" />
+          <audio controls="" src="./mdctGAN/mdct6x/p374_002.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>Wave-U-Mamba</h6>
+          <img src="./Wave-U-Mamba/6x/p374_002_mdct.png" alt="Wave-U-Mamba" />
+          <audio controls="" src="./Wave-U-Mamba/6x/p374_002.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6><strong>SwinSRGAN (Proposed)</strong></h6>
+          <img src="./swin/swin6x/p374_002_generated_long_mdct.png" alt="SwinSRGAN" />
+          <audio controls="" src="./swin/swin6x/p374_002_generated_long.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>Ground Truth HR</h6>
+          <img src="./Target/p374_002_mdct.png" alt="Ground Truth HR" />
+          <audio controls="" src="./Target/p374_002.wav"></audio>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="p360_008-12-khz---48-khz">p360_008 (12 kHz -&gt; 48 kHz)</h5>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <div class="column-content">
+          <h6>Ground Truth LR</h6>
+          <img src="./LR/p360_008_12k_mdct.png" alt="Ground Truth LR" />
+          <audio controls="" src="./LR/p360_008_12k.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>WSRGLOW</h6>
+          <img src="./WSRGlow/4x/p360_008_mdct.png" alt="WSRGLOW" />
+          <audio controls="" src="./WSRGlow/4x/p360_008.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>NVSR</h6>
+          <img src="./NVSR/4x/p360_008_mdct.png" alt="NVSR" />
+          <audio controls="" src="./NVSR/4x/p360_008.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>Wave-U-Mamba</h6>
+          <img src="./Wave-U-Mamba/4x/p360_008_mdct.png" alt="Wave-U-Mamba" />
+          <audio controls="" src="./Wave-U-Mamba/4x/p360_008.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6><strong>SwinSRGAN (Proposed)</strong></h6>
+          <img src="./swin/4x/p360_008_generated_long_mdct.png" alt="SwinSRGAN" />
+          <audio controls="" src="./swin/4x/p360_008_generated_long.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>Ground Truth HR</h6>
+          <img src="./Target/p360_008_mdct.png" alt="Ground Truth HR" />
+          <audio controls="" src="./Target/p360_008.wav"></audio>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+<h5 id="p376_007-12-khz---48-khz">p376_007 (12 kHz -&gt; 48 kHz)</h5>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <div class="column-content">
+          <h6>Ground Truth LR</h6>
+          <img src="./LR/p376_007_12k_mdct.png" alt="Ground Truth LR" />
+          <audio controls="" src="./LR/p376_007_12k.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>WSRGlow</h6>
+          <img src="./WSRGlow/4x/p376_007_mdct.png" alt="WSRGlow" />
+          <audio controls="" src="./WSRGlow/4x/p376_007.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>NVSR</h6>
+          <img src="./NVSR/4x/p376_007_mdct.png" alt="NVSR" />
+          <audio controls="" src="./NVSR/4x/p376_007.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>mdctGAN</h6>
+          <img src="./mdctGAN/4x/p376_007_mdct.png" alt="mdctGAN" />
+          <audio controls="" src="./mdctGAN/4x/p376_007.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6><strong>SwinSRGAN (Proposed)</strong></h6>
+          <img src="./swin/4x/p376_007_generated_long_mdct.png" alt="SwinSRGAN" />
+          <audio controls="" src="./swin/4x/p376_007_generated_long.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>Ground Truth HR</h6>
+          <img src="./Target/p376_007_mdct.png" alt="Ground Truth HR" />
+          <audio controls="" src="./Target/p376_007.wav"></audio>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="Example of bandwidth case on HiFi-TTS dataset">Example of bandwidth case on HiFi-TTS dataset</h4>
+
+
+<h5 id="wonderfuladventures_19_seacole_0084-8-khz---48-khz">wonderfuladventures_19_seacole_0084 (8 kHz -&gt; 48 kHz)</h5>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <div class="column-content">
+          <h6>Ground Truth LR</h6>
+          <img src="./HiFi-generate/wonderfuladventures_19_seacole_0084_8k_mdct.png" alt="Ground Truth LR" />
+          <audio controls="" src="./HiFi-generate/wonderfuladventures_19_seacole_0084_8k.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6><strong>SwinSRGAN (Proposed)</strong></h6>
+          <img src="./HiFi-generate/wonderfuladventures_19_seacole_0084_generated_long_mdct.png" alt="SwinSRGAN" />
+          <audio controls="" src="./HiFi-generate/wonderfuladventures_19_seacole_0084_generated_long.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>Ground Truth HR</h6>
+          <img src="./HiFi-generate/wonderfuladventures_19_seacole_0084_mdct.png" alt="Ground Truth HR" />
+          <audio controls="" src="./HiFi-generate/wonderfuladventures_19_seacole_0084.wav"></audio>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h5 id="wonderfuladventures_19_seacole_0085-8-khz---48-khz">wonderfuladventures_19_seacole_0084 (8 kHz -&gt; 48 kHz)</h5>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <div class="column-content">
+          <h6>Ground Truth LR</h6>
+          <img src="./HiFi-generate/wonderfuladventures_19_seacole_0085_8k_mdct.png" alt="Ground Truth LR" />
+          <audio controls="" src="./HiFi-generate/wonderfuladventures_19_seacole_0085_8k.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6><strong>SwinSRGAN (Proposed)</strong></h6>
+          <img src="./HiFi-generate/wonderfuladventures_19_seacole_0085_generated_long_mdct.png" alt="SwinSRGAN" />
+          <audio controls="" src="./HiFi-generate/wonderfuladventures_19_seacole_0085_generated_long.wav"></audio>
+        </div>
+      </td>
+      <td>
+        <div class="column-content">
+          <h6>Ground Truth HR</h6>
+          <img src="./HiFi-generate/wonderfuladventures_19_seacole_0085_mdct.png" alt="Ground Truth HR" />
+          <audio controls="" src="./HiFi-generate/wonderfuladventures_19_seacole_0085.wav"></audio>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+
+ 
+ <div id="footer" class="page__footer">
+   <footer>
+     <div class="page__footer-copyright">© 2025 Judgeyjj. Powered by <a href="https://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" rel="nofollow">Minimal Mistakes</a>.</div>
+   </footer>
+ </div>
+   
+  <script src="/assets/js/main.min.js"></script>
+
+  </body>
 </html>
