@@ -115,13 +115,12 @@
   
 
 
-    <h4 id="SwinSRGAN: Swin Transformer-based Generative Adversarial Network for High-Fidelity Speech Super-Resolution"><a href="https://github.com/judgeyjj/SwinSRGAN">SwinSRGAN: Swin Transformer-based Generative Adversarial Network for High-Fidelity Speech Super-Resolution</a></h4>
-<p><b>Jiajun Yuan</b>, Xiaochen Wang, Yulin Wu, Yuhang Xiao, Chenhao Hu, Xueyang Lv, Haoran Chen, Zhiyao He</p>
+    <h4 id="STSR: High-Fidelity Speech Super-Resolution via Spectral-Transient Context Modeling">STSR: High-Fidelity Speech Super-Resolution via Spectral-Transient Context Modeling</h4>
 
 
 <h4 id="abstract">Abstract</h4>
 
-<p>Speech super-resolution (SR) reconstructs high-frequency content from low-resolution speech signals. Existing systems often suffer from representation mismatch in two-stage mel–vocoder pipelines and from over-smoothing of hallucinated high-band content by CNN-only generators. Diffusion and flow models are computationally expensive, and their robustness across domains and sampling rates remains limited. We propose SwinSRGAN, an end-to-end framework operating on Modified Discrete Cosine Transform (MDCT) magnitudes. It is a Swin Transformer-based U-Net that captures long-range spectro-temporal dependencies. A hybrid adversarial scheme combines time-domain MPD/MSD discriminators with a multi-band MDCT discriminator specialized for the high-frequency band. Training employs a sparse-aware regularizer on arcsinh-compressed MDCT to better preserve transient components. The system upsamples inputs at various sampling rates to 48 kHz in a single pass and operates in real time. On standard benchmarks, SwinSRGAN reduces objective error and improves ABX preference scores. In zero-shot tests on HiFi-TTS without fine-tuning, it outperforms NVSR and mdctGAN, demonstrating strong generalization across datasets.</p>
+<p>Speech super-resolution (SR) requires a delicate balance between preserving global harmonic coherence and sharp local transients. While diffusion-based models achieve impressive fidelity, their computational demands limit practical use; conversely, efficient time-domain architectures often struggle to capture the long-range spectral dependencies essential for precise harmonic alignment. We introduce STSR, an end-to-end MDCT-domain framework designed to bridge this gap. STSR leverages a Spectral-Contextual Attention mechanism with hierarchical windowing to aggregate non-local context, ensuring consistent harmonic restoration up to 48 kHz. To prevent the loss of transient clarity in compressed spectral representations, we incorporate a sparse-aware regularization strategy. Experimental results demonstrate that STSR surpasses state-of-the-art baselines in both perceptual quality and zero-shot generalization, establishing a robust, real-time paradigm for high-fidelity speech restoration.</p>
 
 <h4 id="Comparisons with State-of-the-Art (SOTA) models on data files from VCTK-Test">Comparisons with State-of-the-Art (SOTA) models on data files from VCTK-Test.</h4>
 
@@ -139,9 +138,9 @@
       </td>
       <td>
         <div class="column-content">
-          <h6>WSRGlow</h6>
-          <img src="./WSRGlow/6x/p360_002_mdct.png" alt="WSRGlow" />
-          <audio controls="" src="./WSRGlow/6x/p360_002.wav"></audio>
+          <h6>NU-Wave2</h6>
+          <img src="./NU-Wave2/6x/p360_002_mdct.png" alt="NU-Wave2" />
+          <audio controls="" src="./NU-Wave2/6x/p360_002.wav"></audio>
         </div>
       </td>
       <td>
@@ -160,9 +159,9 @@
       </td>
       <td>
         <div class="column-content">
-          <h6><strong>SwinSRGAN (Proposed)</strong></h6>
-          <img src="./swin/swin6x/p360_002_generated_long_mdct.png" alt="SwinSRGAN" />
-          <audio controls="" src="./swin/swin6x/p360_002_generated_long.wav"></audio>
+          <h6><strong>STSR (Proposed)</strong></h6>
+          <img src="./STSR/6x/p360_002_generated_long_mdct.png" alt="STSR" />
+          <audio controls="" src="./STSR/6x/p360_002_generated_long.wav"></audio>
         </div>
       </td>
       <td>
@@ -203,16 +202,16 @@
       </td>
       <td>
         <div class="column-content">
-          <h6>Wave-U-Mamba</h6>
-          <img src="./Wave-U-Mamba/6x/p374_002_mdct.png" alt="Wave-U-Mamba" />
-          <audio controls="" src="./Wave-U-Mamba/6x/p374_002.wav"></audio>
+          <h6>HiFi-SR</h6>
+          <img src="./HiFi-SR/6x/p374_002_mdct.png" alt="HiFi-SR" />
+          <audio controls="" src="./HiFi-SR/6x/p374_002.wav"></audio>
         </div>
       </td>
       <td>
         <div class="column-content">
-          <h6><strong>SwinSRGAN (Proposed)</strong></h6>
-          <img src="./swin/swin6x/p374_002_generated_long_mdct.png" alt="SwinSRGAN" />
-          <audio controls="" src="./swin/swin6x/p374_002_generated_long.wav"></audio>
+          <h6><strong>STSR (Proposed)</strong></h6>
+          <img src="./STSR/6x/p374_002_generated_long_mdct.png" alt="STSR" />
+          <audio controls="" src="./STSR/6x/p374_002_generated_long.wav"></audio>
         </div>
       </td>
       <td>
@@ -240,9 +239,9 @@
       </td>
       <td>
         <div class="column-content">
-          <h6>WSRGLOW</h6>
-          <img src="./WSRGlow/4x/p360_008_mdct.png" alt="WSRGLOW" />
-          <audio controls="" src="./WSRGlow/4x/p360_008.wav"></audio>
+          <h6>NU-Wave2</h6>
+          <img src="./NU-Wave2/4x/p360_008_mdct.png" alt="NU-Wave2" />
+          <audio controls="" src="./NU-Wave2/4x/p360_008.wav"></audio>
         </div>
       </td>
       <td>
@@ -254,16 +253,16 @@
       </td>
       <td>
         <div class="column-content">
-          <h6>Wave-U-Mamba</h6>
-          <img src="./Wave-U-Mamba/4x/p360_008_mdct.png" alt="Wave-U-Mamba" />
-          <audio controls="" src="./Wave-U-Mamba/4x/p360_008.wav"></audio>
+          <h6>HiFi-SR</h6>
+          <img src="./HiFi-SR/4x/p360_008_mdct.png" alt="HiFi-SR" />
+          <audio controls="" src="./HiFi-SR/4x/p360_008.wav"></audio>
         </div>
       </td>
       <td>
         <div class="column-content">
-          <h6><strong>SwinSRGAN (Proposed)</strong></h6>
-          <img src="./swin/4x/p360_008_generated_long_mdct.png" alt="SwinSRGAN" />
-          <audio controls="" src="./swin/4x/p360_008_generated_long.wav"></audio>
+          <h6><strong>STSR (Proposed)</strong></h6>
+          <img src="./STSR/4x/p360_008_generated_long_mdct.png" alt="STSR" />
+          <audio controls="" src="./STSR/4x/p360_008_generated_long.wav"></audio>
         </div>
       </td>
       <td>
@@ -292,9 +291,9 @@
       </td>
       <td>
         <div class="column-content">
-          <h6>WSRGlow</h6>
-          <img src="./WSRGlow/4x/p376_007_mdct.png" alt="WSRGlow" />
-          <audio controls="" src="./WSRGlow/4x/p376_007.wav"></audio>
+          <h6>NU-Wave2</h6>
+          <img src="./NU-Wave2/4x/p376_007_mdct.png" alt="NU-Wave2" />
+          <audio controls="" src="./NU-Wave2/4x/p376_007.wav"></audio>
         </div>
       </td>
       <td>
@@ -313,9 +312,9 @@
       </td>
       <td>
         <div class="column-content">
-          <h6><strong>SwinSRGAN (Proposed)</strong></h6>
-          <img src="./swin/4x/p376_007_generated_long_mdct.png" alt="SwinSRGAN" />
-          <audio controls="" src="./swin/4x/p376_007_generated_long.wav"></audio>
+          <h6><strong>STSR (Proposed)</strong></h6>
+          <img src="./STSR/4x/p376_007_generated_long_mdct.png" alt="STSR" />
+          <audio controls="" src="./STSR/4x/p376_007_generated_long.wav"></audio>
         </div>
       </td>
       <td>
@@ -346,8 +345,8 @@
       </td>
       <td>
         <div class="column-content">
-          <h6><strong>SwinSRGAN (Proposed)</strong></h6>
-          <img src="./HiFi-generate/wonderfuladventures_19_seacole_0084_generated_long_mdct.png" alt="SwinSRGAN" />
+          <h6><strong>STSR (Proposed)</strong></h6>
+          <img src="./HiFi-generate/wonderfuladventures_19_seacole_0084_generated_long_mdct.png" alt="STSR" />
           <audio controls="" src="./HiFi-generate/wonderfuladventures_19_seacole_0084_generated_long.wav"></audio>
         </div>
       </td>
@@ -376,8 +375,8 @@
       </td>
       <td>
         <div class="column-content">
-          <h6><strong>SwinSRGAN (Proposed)</strong></h6>
-          <img src="./HiFi-generate/wonderfuladventures_19_seacole_0085_generated_long_mdct.png" alt="SwinSRGAN" />
+          <h6><strong>STSR (Proposed)</strong></h6>
+          <img src="./HiFi-generate/wonderfuladventures_19_seacole_0085_generated_long_mdct.png" alt="STSR" />
           <audio controls="" src="./HiFi-generate/wonderfuladventures_19_seacole_0085_generated_long.wav"></audio>
         </div>
       </td>
